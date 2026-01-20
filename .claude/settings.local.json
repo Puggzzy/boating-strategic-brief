@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(py hello_world.py)",
+      "Bash(git init:*)",
+      "Bash(git add:*)"
+    ]
+  }
+}

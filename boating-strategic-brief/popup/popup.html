@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Boating Strategic Brief</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <svg class="anchor-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C10.9 2 10 2.9 10 4C10 4.74 10.4 5.39 11 5.73V7H6C5.45 7 5 7.45 5 8C5 8.55 5.45 9 6 9H11V14.27C9.58 13.81 8.32 12.94 7.39 11.76L5.97 13.18C7.32 14.91 9.17 16.2 11.29 16.77L9 19.06V21H11V19.06L12 18.06L13 19.06V21H15V19.06L12.71 16.77C14.83 16.2 16.68 14.91 18.03 13.18L16.61 11.76C15.68 12.94 14.42 13.81 13 14.27V9H18C18.55 9 19 8.55 19 8C19 7.45 18.55 7 18 7H13V5.73C13.6 5.39 14 4.74 14 4C14 2.9 13.1 2 12 2Z"/>
+        </svg>
+        <div class="title-group">
+          <h1>BOATING BRIEF</h1>
+          <span class="subtitle">Strategic Intelligence Daily</span>
+        </div>
+      </div>
+      <button id="settings-btn" class="settings-btn" title="Settings">
+        <svg class="settings-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M19.14 12.94c.04-.31.06-.63.06-.94 0-.31-.02-.63-.06-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.04.31-.06.63-.06.94s.02.63.06.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/>
+        </svg>
+      </button>
+    </header>
+
+    <!-- Settings Panel -->
+    <div id="settings-panel" class="settings-panel hidden">
+      <div class="settings-header">
+        <h2>Settings</h2>
+        <button id="settings-close" class="settings-close" title="Close settings">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="settings-content">
+        <div class="settings-field">
+          <label for="api-key-input">OpenAI API Key</label>
+          <p class="settings-hint">Get your key at <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener">platform.openai.com</a></p>
+          <div class="api-key-wrapper">
+            <input type="password" id="api-key-input" placeholder="sk-..." autocomplete="off">
+            <button id="toggle-key-visibility" class="toggle-visibility" title="Show/hide key">
+              <svg id="eye-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="settings-actions">
+          <button id="save-settings" class="save-btn">Save Settings</button>
+        </div>
+        <p id="settings-status" class="settings-status"></p>
+
+        <div class="settings-divider"></div>
+
+        <div class="settings-field">
+          <label>Test Auto-Refresh</label>
+          <p class="settings-hint">Set a test alarm to verify auto-refresh works (fires in 1 minute)</p>
+          <button id="test-alarm-btn" class="test-alarm-btn">Set Test Alarm (1 min)</button>
+          <p id="alarm-info" class="alarm-info"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <main id="main-content" class="content">
+      <div id="loading" class="loading">
+        <div class="spinner"></div>
+        <p>Fetching briefing...</p>
+      </div>
+
+      <div id="error" class="error hidden">
+        <p class="error-message"></p>
+      </div>
+
+      <div id="briefing" class="hidden">
+        <section class="summary-section">
+          <h2>TODAY'S BRIEFING</h2>
+          <p id="summary" class="summary-text"></p>
+        </section>
+
+        <section class="items-section">
+          <ul id="items-list" class="items-list"></ul>
+        </section>
+      </div>
+
+      <div id="no-briefing" class="no-briefing hidden">
+        <p>No briefing available yet.</p>
+        <p>Click refresh to generate one.</p>
+      </div>
+
+      <div id="setup-required" class="setup-required hidden">
+        <svg class="setup-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+        </svg>
+        <h3>API Key Required</h3>
+        <p>To use the Boating Strategic Brief, you need to configure your OpenAI API key.</p>
+        <button id="open-settings" class="open-settings-btn">Open Settings</button>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <span id="last-updated" class="last-updated"></span>
+      <button id="refresh-btn" class="refresh-btn" title="Refresh briefing">
+        <svg class="refresh-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4C7.58 4 4.01 7.58 4.01 12C4.01 16.42 7.58 20 12 20C15.73 20 18.84 17.45 19.73 14H17.65C16.83 16.33 14.61 18 12 18C8.69 18 6 15.31 6 12C6 8.69 8.69 6 12 6C13.66 6 15.14 6.69 16.22 7.78L13 11H20V4L17.65 6.35Z"/>
+        </svg>
+        Refresh
+      </button>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

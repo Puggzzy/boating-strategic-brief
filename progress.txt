@@ -1,0 +1,7 @@
+[x] Initialize manifest.json and file structure
+[x] Create config.js for OpenAI Key
+[x] Code background.js: OpenAI API integration with Web Search and persona instructions
+[x] Code background.js: Article deduplication and daily alarm logic
+[x] Code popup.html/css: Nautical-themed UI widget
+[x] Code popup.js: Fetch briefing from storage/background and display
+[x] Final verification: Ensure background script runs autonomously every morning
