@@ -17,7 +17,7 @@ A Chrome Extension that delivers daily strategic briefings from boatingindustry.
 
 ### Step 1: Download
 
-1. Click the green **"Code"** button above
+1. Click the green **"Code"** green button above
 2. Click **"Download ZIP"**
 3. Unzip the folder on your computer
 
